@@ -26,9 +26,19 @@ from big_vision.models.proj.paligemma import paligemma
 from big_vision.trainers.proj.paligemma import predict_fns
 
 import logging
+from datetime import datetime
+
+log_dir = "/vast/yw4142/checkpoints/llvm"
+os.makedirs(log_dir, exist_ok=True)
+log_filename = datetime.now().strftime("%Y%m%d_%H%M%S.log")
+log_path = os.path.join(log_dir, log_filename)
 logging.basicConfig(
-    level=logging.INFO,  # or DEBUG if you want more details
+    level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler(log_path),
+        logging.StreamHandler(sys.stdout)
+    ]
 )
 logger = logging.getLogger(__name__)
 
@@ -56,9 +66,10 @@ decode_fn = predict_fns.get_all(model)['decode']
 decode = functools.partial(decode_fn, devices=jax.devices(), eos_token=tokenizer.eos_id())
 
 # --- Eval ---
-dataset = load_dataset("MMInstruction/Clevr_CoGenT_ValB", split="train")
-# dataset = dataset.select(range(2000))  # For testing purposes
-batch_size = 20
+dataset = load_dataset("Yvonne511/Clevr_CoGenT_ValB_w_depth_prompt", split="train")
+dataset = dataset.select(range(10000))  # For testing purposes
+# dataset = dataset.select(range(40))
+batch_size = 5
 assert len(dataset) % batch_size == 0, "Dataset size must be divisible by batch size."
 
 def preprocess_image(image, size=448):
@@ -105,25 +116,32 @@ def postprocess_tokens(tokens):
         pass
     return tokenizer.decode(tokens)
 
-def extract_gt_answer(gt_text):
-    # Get value inside <answer> ... </answer>
-    match = re.search(r"<answer>\s*(.*?)\s*</answer>", gt_text)
-    if match:
-        return match.group(1).strip().lower()
-    return gt_text.strip().lower()
+# def extract_gt_answer(gt_text):
+#     # Get value inside <answer> ... </answer>
+#     match = re.search(r"<answer>\s*(.*?)\s*</answer>", gt_text)
+#     if match:
+#         return match.group(1).strip().lower()
+#     return gt_text.strip().lower()
 
 def normalize_answer(text):
-    # Lowercase and keep only alphanumerics and digits
+    """Normalize the answer to be a number or 'yes'/'no'."""
     text = text.lower().strip()
-    # Try to extract a number if present
+
+    # Check for 'yes' or 'no'
+    if text in {"yes", "no"}:
+        return text
+
+    # Extract numeric value
+    try:
+        return str(w2n.word_to_num(text))
+    except (ValueError, TypeError):
+        pass
+
+    # Extract digits directly
     numbers = re.findall(r"\d+", text)
     if numbers:
-        return numbers[0]  # assume single answer
-    # Try yes/no logic
-    if "yes" in text:
-        return "yes"
-    elif "no" in text:
-        return "no"
+        return numbers[0]
+
     return text
 
 def compute_accuracy(responses, ground_truths):
@@ -131,16 +149,16 @@ def compute_accuracy(responses, ground_truths):
     correct = 0
 
     for pred, gt in zip(responses, ground_truths):
-        pred_norm = normalize_answer(pred)
-        gt_norm = normalize_answer(extract_gt_answer(gt))
-        if pred_norm == gt_norm:
+        pred = normalize_answer(pred)
+        # gt_norm = normalize_answer(extract_gt_answer(gt))
+        if pred == gt:
             correct += 1
         # else:
         #     print(f"❌ Wrong — Pred: '{pred}' | GT: '{gt}' → ({pred_norm} ≠ {gt_norm})")
     return correct / len(responses)
 
 # SEQLEN = 128
-SEQLEN = 256
+SEQLEN = 1024
 responses = []
 ground_truths = []
  
@@ -149,8 +167,9 @@ for i in tqdm(range(0, len(dataset), batch_size)):
 
     # Unpack columns
     images_raw = batch["image"]  # List of PIL images
-    questions = batch["problem"]
-    gt_answers_raw = batch["solution"]
+    questions = batch["question"]
+    gt_answers_raw = batch["answer"]
+    prompts = batch["description_ordered"]
     gt_answers = [ans.lower() for ans in gt_answers_raw]
 
     # Preprocess images
@@ -158,9 +177,9 @@ for i in tqdm(range(0, len(dataset), batch_size)):
 
     # Preprocess tokens per sample
     tokens_list, mask_ar_list, mask_loss_list, mask_input_list = [], [], [], []
-    for question, answer in zip(questions, gt_answers):
+    for question, prompt, answer in zip(questions, prompts, gt_answers):
         tokens, mask_ar, mask_loss, mask_input = preprocess_tokens(
-            prefix=question, suffix=None, seqlen=SEQLEN
+            prefix=f"{prompt}\nQuestion: {question}", suffix=None, seqlen=SEQLEN
         )
         tokens_list.append(np.asarray(tokens))
         mask_ar_list.append(np.asarray(mask_ar))
@@ -186,5 +205,5 @@ for i in tqdm(range(0, len(dataset), batch_size)):
     responses.extend(responses_batch)
     ground_truths.extend(gt_answers)
 correct = compute_accuracy(responses, ground_truths)
-print(f"Accuracy: {correct:.2%}")
+logger.info(f"Accuracy: {correct:.2%}")
 # Accuracy: 38.52%
