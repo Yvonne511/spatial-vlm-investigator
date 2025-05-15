@@ -19,10 +19,6 @@ Both scripts are standalone and can be executed directly.
 
 ```bash
 python model/pali_sat_grpo.py
-### ▶️ Run SFT Training
-
-```bash
-python model/pali_sat_sft.py
 
 
 # spatial-clip
