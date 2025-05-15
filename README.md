@@ -30,9 +30,7 @@ python model/pali_sat_grpo.py
 ```bash
 python model/pali_sat_sft.py
 ```
-
-  
-### 📊 CVBench Evaluation Results
+#### 📊 CVBench Evaluation Results
 | Model                                 | Counting<br>(Pass@4) | Relation<br>(Pass@4) | Depth<br>(Pass@4) | Distance<br>(Pass@4) | Total<br>(Pass@4) |
 |:-------------------------------------:|:---------------------:|:---------------------:|:------------------:|:---------------------:|:------------------:|
 | Pali-gemma2-3B-mix-224                | 64.00%                | 77.08%                | 51.83%             | 14.83%                | 52.16%             |
@@ -40,7 +38,7 @@ python model/pali_sat_sft.py
 | Pali-gemma2-3B-mix-224-SFT            | 65.07% (72.08%)   | 80.92% (82.92%)   | 61.67% (**91.17%**) | 59.50% (**90.00%**)   | 66.79% (**84.22%**) |
 | Pali-gemma2-3B-mix-224-GRPO-v2        | **65.6%** (**73.07%**) | **84.92%** (**86.00%**) | **76.33%** (88.17%) | **62.67%** (78.00%) | **72.38%** (81.31%) |
 
-### 📊 OOD Generalization Results
+#### 📊 OOD Generalization Results
 | Model        | Depth(ID)| Depth(OOD)      | Distance(ID) | Distance(OOD)     | Distance ID-OOD Gap |
 |--------------|------------|-------------------|----------------|---------------------|----------------------|
 | Base Model   | 51.83%     | 59.00%             | 14.83%         | 5.83%               | -9.00%               |
