@@ -4,7 +4,7 @@ This repository contains the codebase and evaluation scripts for our paper:
 
 **📄 [Paper (PDF)](./paper.pdf)**  
 
-## 🏋️ GRPO and SFT Fine-tuning (on SAT Dataset)
+# 🏋️ GRPO and SFT Fine-tuning (on SAT Dataset)
 
 We provide training scripts for **Group Relative Policy Optimization (GRPO)** and **Supervised Fine-Tuning (SFT)** under the `model/` directory.
 
