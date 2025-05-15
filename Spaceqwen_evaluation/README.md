@@ -79,7 +79,7 @@ python test_spaceqwen_vqa_batch.py --dataset SAT --sat_json data/SAT/SAT_train_1
 ## File Structure
 
 ```
-SpaceQwen_eval/
+SpaceQwen_evalutaion/
   test_spaceqwen_vqa_batch.py
   data/
     process_dataset.py
