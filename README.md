@@ -15,10 +15,33 @@ We provide training scripts for **Group Relative Policy Optimization (GRPO)** an
 
 Both scripts are standalone and can be executed directly.
 
-### ▶️ Run GRPO Training
+#### ▶️ Run GRPO Training
 
 ```bash
 python model/pali_sat_grpo.py
+```
+#### ▶️ Run SFT Training
+
+```bash
+python model/pali_sat_sft.py
+```
+#### 📊 CVBench Evaluation Results
+
+| Model                                 | Counting<br>(Pass@4) | Relation<br>(Pass@4) | Depth<br>(Pass@4) | Distance<br>(Pass@4) | Total<br>(Pass@4) |
+|:-------------------------------------:|:---------------------:|:---------------------:|:------------------:|:---------------------:|:------------------:|
+| Pali-gemma2-3B-mix-224                | 64.00%                | 77.08%                | 51.83%             | 14.83%                | 52.16%             |
+| Pali-gemma2-3B-mix-224-GRPO-v1        | 65.10%                | 78.41%                | 56.83%             | 18.00%                | 54.77%             |
+| Pali-gemma2-3B-mix-224-SFT            | 65.07% (**72.08%**)   | 80.92% (**82.92%**)   | 61.67% (**91.17%**) | 59.50% (**90.00%**)   | 66.79% (**84.22%**) |
+| Pali-gemma2-3B-mix-224-GRPO-v2        | **65.6%** (**73.07%**) | **84.92%** (**86.00%**) | **76.33%** (**88.17%**) | **62.67%** (**78.00%**) | **72.38%** (**81.31%**) |
+
+#### 📊 OOD Generalization Results
+
+| Model        | Depth (ID) | Depth (OOD)       | Distance (ID) | Distance (OOD)     | Distance ID-OOD Gap |
+|--------------|------------|-------------------|----------------|---------------------|----------------------|
+| Base Model   | 51.83%     | 59.00%             | 14.83%         | 5.83%               | +9.00%               |
+| SFT Model    | 61.67%     | **56.33%** (-4.5%) 🔻 | 59.50%         | **47.47%** 🔻         | **12.03%** 🔻         |
+| GRPO Model   | 76.33%     | **70.50%** (+19.5%) ✅ | 62.67%         | **59.50%** ✅         | **3.17%** ✅           |
+
 
 
 # spatial-clip
