@@ -42,10 +42,24 @@ python model/pali_sat_sft.py
 | SFT Model    | 61.67%     | **56.33%** (-4.5%) 🔻 | 59.50%         | **47.47%** 🔻     | **12.03%** 🔻         |
 | GRPO Model   | 76.33%     | **70.50%** (+19.5%) ✅ | 62.67%         | **59.50%** ✅     | **3.17%** ✅           |
 
+# Evaluation
+```bash
+python eval_paligemma_clevr.py # eval on Clevr dataset
+python eval_paligemma_cvbench.py # eval on CV-bench dataset
+python eval_paligemma_vsr.py # eval on VSR dataset
+python eval_paligemma_clevr_new.py # eval on generated Clevr dataset with prompts
+```
 
+# Clevr Description Prompt Generation
+```bash
+python clevr_desc/merge_clevr_w_depth_desc.py
+```
 
-# spatial-vlm-investigator
-Env only use v100 or T4
+# Env
+Env setup: [Fine-Tuning PaliGemma](https://colab.research.google.com/github/google/generative-ai-docs/blob/main/site/en/gemma/docs/paligemma/fine-tuning-paligemma.ipynb).
+
+Env only avaliable for v100 or T4
+
 # Tests
 Clevr_CoGenT_ValB spacial counting: https://huggingface.co/datasets/MMInstruction/Clevr_CoGenT_ValB
 
