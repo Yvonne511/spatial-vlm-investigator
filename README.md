@@ -1,3 +1,11 @@
+# 🧠 Enhancing Spatial Reasoning in Vision-Language Models via Chain-of-Thought Prompting and Reinforcement Learning
+
+This repository contains the codebase and evaluation scripts for our paper:
+
+**📄 [Paper (PDF)](./Enhancing Spatial Reasoning in Vision-Language Models via Chain-of-Thought Prompting and Reinforcement Learning.pdf)**  
+
+
+
 # spatial-clip
 Env only use v100 or T4
 # Tests
