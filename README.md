@@ -14,6 +14,11 @@ We provide training scripts for **Group Relative Policy Optimization (GRPO)** an
 | `model/pali_sat_sft.py`  | Train PaLI-Gemma on SAT with standard Supervised Fine-Tuning |
 
 Both scripts are standalone and can be executed directly.
+#### 🔧 Installation
+
+```bash
+pip install -r model/requirements.txt
+```
 
 #### ▶️ Run GRPO Training
 
