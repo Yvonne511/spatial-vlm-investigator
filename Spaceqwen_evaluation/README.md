@@ -60,7 +60,7 @@ python test_spaceqwen_vqa_batch.py --dataset CLEVR --samples 100 --batch_size 4
 #### Example: Test SAT dataset
 
 ```bash
-python test_spaceqwen_vqa_batch.py --dataset SAT --sat_json data/SAT/SAT_train_15000.json --sat_image_dir data/SAT/ --samples 50 --batch_size 2
+python test_spaceqwen_vqa_batch.py --dataset SAT --sat_json data/SAT/SAT_train_15000.json --sat_image_dir data/SAT/ --samples 50
 ```
 
 ### 3. Output
