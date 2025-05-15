@@ -62,7 +62,7 @@ python clevr_desc/merge_clevr_w_depth_desc.py
 
 SpaceQwen is a model trained using a third-party generated dataset following Google's [SpatialVLM dataset scheme](https://github.com/remyxai/VQASynth/tree/main). The dataset was synthesized using the VQASynth pipeline, which enables the creation of spatial reasoning VQA datasets from arbitrary image collections. Our work focuses on the **counting aspect** of the trained model, evaluating its ability to perform spatial counting tasks.
 
-For detailed instructions on how to evaluate SpaceQwen and reproduce our results, please refer to the [README in `./Spaceqwen_evaluation/README.md`](../Spaceqwen_evaluation/README.md).
+For detailed instructions on how to evaluate SpaceQwen and reproduce our results, please refer to the [README in `./Spaceqwen_evaluation/README.md`](https://github.com/Yvonne511/spatial-vlm-investigator/tree/main/Spaceqwen_evaluation).
 
 # Env
 Env setup: [Fine-Tuning PaliGemma](https://colab.research.google.com/github/google/generative-ai-docs/blob/main/site/en/gemma/docs/paligemma/fine-tuning-paligemma.ipynb).
