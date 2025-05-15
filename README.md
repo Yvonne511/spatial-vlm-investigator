@@ -4,6 +4,25 @@ This repository contains the codebase and evaluation scripts for our paper:
 
 **📄 [Paper (PDF)](./paper.pdf)**  
 
+## 🏋️ GRPO and SFT Fine-tuning (on SAT Dataset)
+
+We provide training scripts for **Group Relative Policy Optimization (GRPO)** and **Supervised Fine-Tuning (SFT)** under the `model/` directory.
+
+| Script | Description |
+|--------|-------------|
+| `model/pali_sat_grpo.py` | Train PaLI-Gemma on SAT with GRPO (Reinforcement Learning) |
+| `model/pali_sat_sft.py`  | Train PaLI-Gemma on SAT with standard Supervised Fine-Tuning |
+
+Both scripts are standalone and can be executed directly.
+
+### ▶️ Run GRPO Training
+
+```bash
+python model/pali_sat_grpo.py
+### ▶️ Run SFT Training
+
+```bash
+python model/pali_sat_sft.py
 
 
 # spatial-clip
