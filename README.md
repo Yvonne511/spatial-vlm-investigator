@@ -2,7 +2,7 @@
 
 This repository contains the codebase and evaluation scripts for our paper:
 
-**📄 [Paper (PDF)](./Enhancing Spatial Reasoning in Vision-Language Models via Chain-of-Thought Prompting and Reinforcement Learning.pdf)**  
+**📄 [Paper (PDF)](./paper.pdf)**  
 
 
 
