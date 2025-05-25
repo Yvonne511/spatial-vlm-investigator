@@ -6,6 +6,8 @@
 
 > 🎯 **Breaking the Reasoning Bottleneck**: While simple Chain-of-Thought prompting fails (and can even hurt!) spatial reasoning in Vision-Language Models, our structured Scene Graph CoT approach delivers **consistent 5-15% accuracy gains** across spatial tasks.
 
+> Heavily inspired by https://github.com/chancharikmitra/CCoT
+
 ## ✨ Key Findings
 
 🚫 **Simple CoT Prompting Fails**: Traditional "think first, then answer" approaches not only fail to improve spatial reasoning but can actually degrade performance in VLMs.
