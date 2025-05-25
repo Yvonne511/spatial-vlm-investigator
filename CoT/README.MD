@@ -4,7 +4,7 @@
 [![GitHub](https://img.shields.io/github/stars/Yvonne511/spatial-vlm-investigator?style=social)](https://github.com/Yvonne511/spatial-vlm-investigator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> 🎯 **Breaking the Reasoning Bottleneck**: While simple Chain-of-Thought prompting fails (and can even hurt!) reasoning in smaller Large-Language Models, especially for Spatial Reasoning tasks in Visual-Language Models, our structured Scene Graph CoT approach delivers **consistent 5-15% accuracy gains** across spatial tasks.
+> 🎯 **Breaking the Reasoning Bottleneck**: While simple Chain-of-Thought prompting fails (and can even hurt!) spatial reasoning in Vision-Language Models, our structured Scene Graph CoT approach delivers **consistent 5-15% accuracy gains** across spatial tasks.
 
 ## ✨ Key Findings
 
@@ -25,9 +25,13 @@ graph TD
     C --> D[Stage 2: Answer Generation]
     D --> E[Final Answer]
     
-    B -.-> F[Objects: {o1, o2, ..., on}]
-    B -.-> G[Attributes: {a1, a2, ..., an}]
-    B -.-> H[Relations: {rij}]
+    F[Objects: o1, o2, ..., on]
+    G[Attributes: a1, a2, ..., an]
+    H[Relations: rij]
+    
+    B --> F
+    B --> G
+    B --> H
 ```
 
 ## 🚀 Quick Start
